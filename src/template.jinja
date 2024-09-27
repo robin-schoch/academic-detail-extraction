@@ -1,0 +1,29 @@
+# Title {{ test }}
+
+**Failed:** {{ failed }}
+**Correct:** {{ correct }}
+**Wrong:** {{ wrong }}
+
+## Failed Items:
+
+| Input |
+|-------|
+{% for input_model in failed_items -%}
+| `{{ input_model.input | replace('\r\n', ' ') | replace('\n', ' ') | replace('\r', ' ') }}` |
+{% endfor %}
+
+## Wrong Items:
+
+| High School | Apprenticeship | Master | Bachelor | PhD | Input |
+|-------|-------------|----------------|--------|----------|-----|
+{% for input_model, education_model in wrong_items -%}
+| {{ input_model.output.high_school }} / {{ education_model.high_school }}  | {{ input_model.output.apprenticeship }} /  {{ education_model.apprenticeship }} | {{ input_model.output.master }} / {{ education_model.master }}  | {{ input_model.output.bachelor }} / {{ education_model.bachelor }} | {{ input_model.output.phd }} / {{ education_model.phd }} |  `{{ input_model.input | replace('\r\n', ' ') | replace('\n', ' ') | replace('\r', ' ') }}` |
+{% endfor %}
+
+## Correct Items:
+
+| High School | Apprenticeship | Master | Bachelor | PhD | Input |
+|-------|-------------|----------------|--------|----------|-----|
+{% for input_model, education_model in correct_items -%}
+| {{ input_model.output.high_school }} / {{ education_model.high_school }}  | {{ input_model.output.apprenticeship }} /  {{ education_model.apprenticeship }} | {{ input_model.output.master }} / {{ education_model.master }}  | {{ input_model.output.bachelor }} / {{ education_model.bachelor }} | {{ input_model.output.phd }} / {{ education_model.phd }} |  `{{ input_model.input | replace('\r\n', ' ') | replace('\n', ' ') | replace('\r', ' ') }}`|
+{% endfor %}

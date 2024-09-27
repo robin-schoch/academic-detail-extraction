@@ -1,0 +1,5 @@
+langchain_mistralai
+langchain
+pydantic
+jinja2
+pandas
