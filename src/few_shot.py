@@ -1,6 +1,6 @@
 from langchain_core.prompts import FewShotPromptTemplate
 from langchain_core.prompts import PromptTemplate
-from llm import build_fined_tuned_mistra_small, build_structured_mistral_large, build_structured_mistral_small
+from llm import build_fined_tuned_mistra_small, build_structured_mistral_large, build_structured_mistral_small, build_fined_tuned_large_mistra_small
 
 
 examples = [
@@ -42,6 +42,9 @@ few_shot_fine_tuned = few_shot_prompt | fine_tuned_llm
 
 large_llm = build_structured_mistral_large()
 few_shot_large = few_shot_prompt | large_llm
+
+large_fine_tuned_llm = build_fined_tuned_large_mistra_small()
+few_shot_large_fine_tuned = few_shot_prompt | large_fine_tuned_llm
 
 if __name__ == "__main__":
     response = few_shot_small.invoke({"query": "- Higher degree in Data Science, Computer Science, Math or other analytical intense specialties"})

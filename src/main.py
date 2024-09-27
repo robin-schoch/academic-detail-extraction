@@ -1,9 +1,10 @@
 from langchain_core.runnables.base import RunnableSerializable
-from few_shot import few_shot_small, few_shot_large, few_shot_fine_tuned
-from zero_shot import large_chain, small_chain, fine_tuned_chain
+from few_shot import few_shot_small, few_shot_large, few_shot_fine_tuned, few_shot_large_fine_tuned
+from zero_shot import large_chain, small_chain, fine_tuned_chain, large_fined_tuned_chain
 from output_model import EducationRequirementOutput
 from parser import parse_input
 from output import save_to_markdown
+import time
 
 def run_test(chain: RunnableSerializable, test_name: str, input_path: str = './academic_details.json') -> None:
     input = parse_input(input_path)
@@ -23,17 +24,20 @@ def run_test(chain: RunnableSerializable, test_name: str, input_path: str = './a
         except Exception as e:
             failed_items.append(item.input)
             print("failed on output", i, item.input, "|", e)
+            time.sleep(10)
 
     save_to_markdown(test_name, wrong_items, correct_items, failed_items)
     print("done with run", test_name)
 
 
 if __name__ == "__main__":
-    run_test(few_shot_small, "Small Few Shot")
-    run_test(few_shot_large, "Large Few Shot")
-    run_test(few_shot_fine_tuned, "Fine Tuned Few Shot")
-    run_test(small_chain, "Small Zero Shot")
-    run_test(large_chain, "Large Zero Shot")
-    run_test(fine_tuned_chain, "Fine Tuned Zero Shot")
+    # run_test(few_shot_small, "Small Few Shot")
+    # run_test(few_shot_large, "Large Few Shot")
+    # run_test(few_shot_fine_tuned, "Fine Tuned Few Shot")
+    # run_test(small_chain, "Small Zero Shot")
+    # run_test(large_chain, "Large Zero Shot")
 
+    run_test(fine_tuned_chain, "Fine Tuned Zero Shot")
+    run_test(few_shot_large_fine_tuned, "Large Fine Tuned Few Shot")
+    run_test(large_fined_tuned_chain, "Large Fine Tuned Zero Shot")
     # run_test(few_shot_chain, "Few Shot Test")

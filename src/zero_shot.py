@@ -1,5 +1,5 @@
 from langchain_core.prompts import PromptTemplate
-from llm import build_fined_tuned_mistra_small, build_structured_mistral_large, build_structured_mistral_small
+from llm import build_fined_tuned_mistra_small, build_structured_mistral_large, build_structured_mistral_small, build_fined_tuned_large_mistra_small
 
 prompt = PromptTemplate.from_template("""
     Your Goal is to extract strucutred information on which education backgrounds are required. Make it match the following Output format:
@@ -22,6 +22,9 @@ small_chain = prompt | small_llm
 
 large_llm = build_structured_mistral_large()
 large_chain = prompt | large_llm
+
+large_fined_tuned_llm = build_fined_tuned_large_mistra_small()
+large_fined_tuned_chain = prompt | large_fined_tuned_llm
 
 if __name__ == "__main__":
     response = fine_tuned_chain.invoke({"query": "- Higher degree in Data Science, Computer Science, Math or other analytical intense specialties"})

@@ -16,6 +16,10 @@ if API_KEY is None:
     raise Exception("Missing Mistral API Key")
 MISTRAL_API_KEY = SecretStr(API_KEY)
 
+def build_fined_tuned_large_mistra_small() -> Runnable[LanguageModelInput, Union[Dict, BaseModel]]:
+    base_model = ChatMistralAI(api_key=MISTRAL_API_KEY, model_name="ft:mistral-large-latest:d77d9de1:20240927:8f545463", temperature=0, max_retries=1, timeout=15)
+    structured_llm = base_model.with_structured_output(EducationRequirementOutput)
+    return structured_llm
 
 def build_fined_tuned_mistra_small() -> Runnable[LanguageModelInput, Union[Dict, BaseModel]]:
     base_model = ChatMistralAI(api_key=MISTRAL_API_KEY, model_name="ft:mistral-small-latest:d77d9de1:20240927:3f86568f", temperature=0, max_retries=1, timeout=10)

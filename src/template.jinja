@@ -9,7 +9,7 @@
 | Input |
 |-------|
 {% for input_model in failed_items -%}
-| `{{ input_model.input | replace('\r\n', ' ') | replace('\n', ' ') | replace('\r', ' ') }}` |
+| `{{ input_model | replace('\r\n', ' ') | replace('\n', ' ') | replace('\r', ' ') }}` |
 {% endfor %}
 
 ## Wrong Items:
